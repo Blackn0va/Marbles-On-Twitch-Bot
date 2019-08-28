@@ -195,7 +195,21 @@ namespace TwitchChatBot
             Marbles_On_Twitch_Bot.Properties.Settings.Default.Save();
         }
 
-        
+        private void LinkToken_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.linkToken.LinkVisited = true;
+
+            // Navigate to a URL.
+            System.Diagnostics.Process.Start("https://twitchtokengenerator.com/");
+        }
+
+        private void LinkDeveloper_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.LinkDeveloper.LinkVisited = true;
+
+            // Navigate to a URL.
+            System.Diagnostics.Process.Start("https://www.twitch.tv/8lackn0va");
+        }
     }
 }
 

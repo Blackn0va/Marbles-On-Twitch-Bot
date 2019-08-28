@@ -42,22 +42,26 @@
             this.txtToken = new System.Windows.Forms.TextBox();
             this.lblUsername = new System.Windows.Forms.Label();
             this.lblToken = new System.Windows.Forms.Label();
+            this.linkToken = new System.Windows.Forms.LinkLabel();
+            this.LinkDeveloper = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(8, 9);
+            this.lblStatus.Location = new System.Drawing.Point(5, 6);
+            this.lblStatus.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(79, 25);
+            this.lblStatus.Size = new System.Drawing.Size(48, 16);
             this.lblStatus.TabIndex = 0;
             this.lblStatus.Text = "Status:";
             // 
             // txtStatus
             // 
-            this.txtStatus.Location = new System.Drawing.Point(93, 9);
+            this.txtStatus.Location = new System.Drawing.Point(62, 6);
+            this.txtStatus.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.txtStatus.Name = "txtStatus";
-            this.txtStatus.Size = new System.Drawing.Size(1140, 25);
+            this.txtStatus.Size = new System.Drawing.Size(760, 16);
             this.txtStatus.TabIndex = 1;
             // 
             // rtbChat
@@ -66,18 +70,20 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rtbChat.Enabled = false;
-            this.rtbChat.Location = new System.Drawing.Point(12, 200);
+            this.rtbChat.Location = new System.Drawing.Point(8, 128);
+            this.rtbChat.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rtbChat.Name = "rtbChat";
-            this.rtbChat.Size = new System.Drawing.Size(962, 226);
+            this.rtbChat.Size = new System.Drawing.Size(643, 146);
             this.rtbChat.TabIndex = 6;
             this.rtbChat.Text = "";
             this.rtbChat.TextChanged += new System.EventHandler(this.RtbChat_TextChanged);
             // 
             // cmdVerbinden
             // 
-            this.cmdVerbinden.Location = new System.Drawing.Point(34, 78);
+            this.cmdVerbinden.Location = new System.Drawing.Point(23, 50);
+            this.cmdVerbinden.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cmdVerbinden.Name = "cmdVerbinden";
-            this.cmdVerbinden.Size = new System.Drawing.Size(156, 102);
+            this.cmdVerbinden.Size = new System.Drawing.Size(104, 65);
             this.cmdVerbinden.TabIndex = 2;
             this.cmdVerbinden.Text = "Verbinden";
             this.cmdVerbinden.UseVisualStyleBackColor = true;
@@ -85,19 +91,19 @@
             // 
             // txtChannel1
             // 
-            this.txtChannel1.Location = new System.Drawing.Point(34, 39);
-            this.txtChannel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtChannel1.Location = new System.Drawing.Point(23, 25);
             this.txtChannel1.Name = "txtChannel1";
-            this.txtChannel1.Size = new System.Drawing.Size(340, 31);
+            this.txtChannel1.Size = new System.Drawing.Size(228, 22);
             this.txtChannel1.TabIndex = 1;
             this.txtChannel1.Text = "Vooshy";
             this.txtChannel1.TextChanged += new System.EventHandler(this.TxtChannel1_TextChanged);
             // 
             // cmdTrennen
             // 
-            this.cmdTrennen.Location = new System.Drawing.Point(196, 78);
+            this.cmdTrennen.Location = new System.Drawing.Point(131, 50);
+            this.cmdTrennen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cmdTrennen.Name = "cmdTrennen";
-            this.cmdTrennen.Size = new System.Drawing.Size(156, 102);
+            this.cmdTrennen.Size = new System.Drawing.Size(104, 65);
             this.cmdTrennen.TabIndex = 3;
             this.cmdTrennen.Text = "Trennen";
             this.cmdTrennen.UseVisualStyleBackColor = true;
@@ -109,46 +115,70 @@
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(634, 14);
-            this.txtUsername.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtUsername.Location = new System.Drawing.Point(423, 9);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(340, 31);
+            this.txtUsername.Size = new System.Drawing.Size(228, 22);
             this.txtUsername.TabIndex = 4;
             this.txtUsername.TextChanged += new System.EventHandler(this.TxtUsername_TextChanged);
             // 
             // txtToken
             // 
-            this.txtToken.Location = new System.Drawing.Point(634, 55);
-            this.txtToken.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtToken.Location = new System.Drawing.Point(423, 35);
             this.txtToken.Name = "txtToken";
             this.txtToken.PasswordChar = '*';
-            this.txtToken.Size = new System.Drawing.Size(340, 31);
+            this.txtToken.Size = new System.Drawing.Size(228, 22);
             this.txtToken.TabIndex = 5;
             this.txtToken.TextChanged += new System.EventHandler(this.TxtToken_TextChanged);
             // 
             // lblUsername
             // 
             this.lblUsername.AutoSize = true;
-            this.lblUsername.Location = new System.Drawing.Point(512, 17);
+            this.lblUsername.Location = new System.Drawing.Point(341, 11);
+            this.lblUsername.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(116, 25);
+            this.lblUsername.Size = new System.Drawing.Size(74, 16);
             this.lblUsername.TabIndex = 11;
             this.lblUsername.Text = "Username:";
             // 
             // lblToken
             // 
             this.lblToken.AutoSize = true;
-            this.lblToken.Location = new System.Drawing.Point(549, 58);
+            this.lblToken.Location = new System.Drawing.Point(366, 37);
+            this.lblToken.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblToken.Name = "lblToken";
-            this.lblToken.Size = new System.Drawing.Size(78, 25);
+            this.lblToken.Size = new System.Drawing.Size(50, 16);
             this.lblToken.TabIndex = 12;
             this.lblToken.Text = "Token:";
             // 
+            // linkToken
+            // 
+            this.linkToken.AutoSize = true;
+            this.linkToken.Location = new System.Drawing.Point(420, 60);
+            this.linkToken.Name = "linkToken";
+            this.linkToken.Size = new System.Drawing.Size(98, 16);
+            this.linkToken.TabIndex = 13;
+            this.linkToken.TabStop = true;
+            this.linkToken.Text = "get your Token";
+            this.linkToken.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkToken_LinkClicked);
+            // 
+            // LinkDeveloper
+            // 
+            this.LinkDeveloper.AutoSize = true;
+            this.LinkDeveloper.Location = new System.Drawing.Point(420, 76);
+            this.LinkDeveloper.Name = "LinkDeveloper";
+            this.LinkDeveloper.Size = new System.Drawing.Size(100, 16);
+            this.LinkDeveloper.TabIndex = 14;
+            this.LinkDeveloper.TabStop = true;
+            this.LinkDeveloper.Text = "Visit Developer";
+            this.LinkDeveloper.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkDeveloper_LinkClicked);
+            // 
             // frmHauptprogramm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(986, 438);
+            this.ClientSize = new System.Drawing.Size(657, 280);
+            this.Controls.Add(this.LinkDeveloper);
+            this.Controls.Add(this.linkToken);
             this.Controls.Add(this.lblToken);
             this.Controls.Add(this.lblUsername);
             this.Controls.Add(this.txtToken);
@@ -160,7 +190,8 @@
             this.Controls.Add(this.txtStatus);
             this.Controls.Add(this.lblStatus);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(1012, 509);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MinimumSize = new System.Drawing.Size(683, 351);
             this.Name = "frmHauptprogramm";
             this.Text = "Marbles on TwitchBot";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmHauptprogramm_FormClosing);
@@ -186,6 +217,8 @@
         internal System.Windows.Forms.TextBox txtToken;
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.Label lblToken;
+        private System.Windows.Forms.LinkLabel linkToken;
+        private System.Windows.Forms.LinkLabel LinkDeveloper;
     }
 }
 
