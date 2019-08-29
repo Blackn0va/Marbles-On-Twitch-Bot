@@ -71,7 +71,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rtbChat.Enabled = false;
             this.rtbChat.Location = new System.Drawing.Point(8, 128);
-            this.rtbChat.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rtbChat.Margin = new System.Windows.Forms.Padding(2);
             this.rtbChat.Name = "rtbChat";
             this.rtbChat.Size = new System.Drawing.Size(643, 146);
             this.rtbChat.TabIndex = 6;
@@ -81,7 +81,7 @@
             // cmdVerbinden
             // 
             this.cmdVerbinden.Location = new System.Drawing.Point(23, 50);
-            this.cmdVerbinden.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmdVerbinden.Margin = new System.Windows.Forms.Padding(2);
             this.cmdVerbinden.Name = "cmdVerbinden";
             this.cmdVerbinden.Size = new System.Drawing.Size(104, 65);
             this.cmdVerbinden.TabIndex = 2;
@@ -101,7 +101,7 @@
             // cmdTrennen
             // 
             this.cmdTrennen.Location = new System.Drawing.Point(131, 50);
-            this.cmdTrennen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmdTrennen.Margin = new System.Windows.Forms.Padding(2);
             this.cmdTrennen.Name = "cmdTrennen";
             this.cmdTrennen.Size = new System.Drawing.Size(104, 65);
             this.cmdTrennen.TabIndex = 3;
@@ -189,8 +189,9 @@
             this.Controls.Add(this.rtbChat);
             this.Controls.Add(this.txtStatus);
             this.Controls.Add(this.lblStatus);
+            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(683, 351);
             this.Name = "frmHauptprogramm";
             this.Text = "Marbles on TwitchBot";

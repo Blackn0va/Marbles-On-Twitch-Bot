@@ -1,0 +1,56 @@
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\Marbles On Twitch Bot.exe.config
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\Marbles On Twitch Bot.exe
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\Marbles On Twitch Bot.pdb
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\Microsoft.Extensions.Configuration.dll
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\Microsoft.Extensions.Logging.dll
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\Microsoft.Extensions.Options.dll
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\Microsoft.Extensions.Primitives.dll
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\Newtonsoft.Json.dll
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\Serilog.dll
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\Serilog.Extensions.Logging.dll
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\System.Buffers.dll
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\System.ComponentModel.Annotations.dll
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\System.Memory.dll
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\System.Numerics.Vectors.dll
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\TwitchLib.Api.Core.dll
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\TwitchLib.Api.Core.Enums.dll
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\TwitchLib.Api.Core.Interfaces.dll
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\TwitchLib.Api.Core.Models.dll
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\TwitchLib.Api.dll
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\TwitchLib.Api.Helix.dll
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\TwitchLib.Api.Helix.Models.dll
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\TwitchLib.Api.V5.dll
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\TwitchLib.Api.V5.Models.dll
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\TwitchLib.Client.dll
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\TwitchLib.Client.Enums.dll
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\TwitchLib.Client.Models.dll
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\TwitchLib.Communication.dll
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\TwitchLib.PubSub.dll
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\Microsoft.Extensions.Configuration.xml
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\Microsoft.Extensions.Configuration.Abstractions.xml
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\Microsoft.Extensions.Configuration.Binder.xml
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\Microsoft.Extensions.Logging.xml
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\Microsoft.Extensions.Logging.Abstractions.xml
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\Microsoft.Extensions.Options.xml
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\Microsoft.Extensions.Primitives.xml
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\Newtonsoft.Json.xml
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\Serilog.pdb
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\Serilog.xml
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\Serilog.Extensions.Logging.xml
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\System.Buffers.xml
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\System.Memory.xml
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\System.Numerics.Vectors.xml
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\bin\Release\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\obj\Release\TwitchChatBot.frmHauptprogramm.resources
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\obj\Release\Marbles_On_Twitch_Bot.Properties.Resources.resources
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\obj\Release\Marbles On Twitch Bot.csproj.GenerateResource.cache
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\obj\Release\Marbles On Twitch Bot.csproj.CoreCompileInputs.cache
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\obj\Release\Marbles On Twitch Bot.csproj.CopyComplete
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\obj\Release\Marbles On Twitch Bot.exe
+C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\obj\Release\Marbles On Twitch Bot.pdb
