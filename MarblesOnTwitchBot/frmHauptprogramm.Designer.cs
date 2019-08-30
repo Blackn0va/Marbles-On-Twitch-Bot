@@ -92,7 +92,7 @@
             this.txtChannel1.Location = new System.Drawing.Point(116, 39);
             this.txtChannel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtChannel1.Name = "txtChannel1";
-            this.txtChannel1.Size = new System.Drawing.Size(249, 31);
+            this.txtChannel1.Size = new System.Drawing.Size(271, 31);
             this.txtChannel1.TabIndex = 1;
             this.txtChannel1.TextChanged += new System.EventHandler(this.TxtChannel1_TextChanged);
             // 
@@ -178,16 +178,16 @@
             // 
             // lblVerbunden
             // 
-            this.lblVerbunden.Location = new System.Drawing.Point(844, 161);
+            this.lblVerbunden.Location = new System.Drawing.Point(634, 161);
             this.lblVerbunden.Name = "lblVerbunden";
-            this.lblVerbunden.Size = new System.Drawing.Size(130, 36);
+            this.lblVerbunden.Size = new System.Drawing.Size(340, 36);
             this.lblVerbunden.TabIndex = 16;
             // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(209, 78);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(156, 102);
+            this.button2.Size = new System.Drawing.Size(178, 102);
             this.button2.TabIndex = 3;
             this.button2.Text = "Trennen";
             this.button2.UseVisualStyleBackColor = true;

@@ -54,4 +54,3 @@ C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\obj\
 C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\obj\Release\Marbles On Twitch Bot.csproj.CopyComplete
 C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\obj\Release\Marbles On Twitch Bot.exe
 C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\obj\Release\Marbles On Twitch Bot.pdb
-C:\Users\h.barthelmes\source\repos\Marbles On Twitch Bot\MarblesOnTwitchBot\obj\Release\Marbles On Twitch Bot.csprojAssemblyReference.cache

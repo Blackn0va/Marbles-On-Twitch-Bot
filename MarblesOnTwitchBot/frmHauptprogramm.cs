@@ -178,9 +178,25 @@ namespace TwitchChatBot
 
         private void CmdTrennen_Click(object sender, EventArgs e)
         {
-            client.Disconnect();
-            lblVerbunden.ForeColor = Color.FromArgb(231, 13, 0); //Grün
-            lblVerbunden.Text = "Verbindung getrennt";
+            try
+            {
+                if (client.IsConnected)
+                {
+                    client.Disconnect();
+                    lblVerbunden.ForeColor = Color.FromArgb(231, 13, 0); //Grün
+                    lblVerbunden.Text = "Verbindung getrennt";
+                }
+                else
+                {
+                    lblVerbunden.Text = "Verbindung getrennt";
+
+                }
+            }
+            catch
+            {
+
+            }
+
 
         }
 
