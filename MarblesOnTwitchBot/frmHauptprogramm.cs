@@ -49,7 +49,7 @@ namespace TwitchChatBot
 
         #region "Backgroundworker"
 
-        private void BgwBot1_DoWork(object sender, DoWorkEventArgs e)
+        public void BgwBot1_DoWork(object sender, DoWorkEventArgs e)
         {
             ConnectionCredentials credentials = new ConnectionCredentials(Marbles_On_Twitch_Bot.Properties.Settings.Default.Username, Marbles_On_Twitch_Bot.Properties.Settings.Default.Token);
             client = new TwitchClient();
@@ -70,11 +70,15 @@ namespace TwitchChatBot
 
                     client.Disconnect();
                     client.Connect();
+                    lblVerbunden.ForeColor = Color.FromArgb(6, 244, 0); //Grün
+                    lblVerbunden.Text = "Verbunden";
                 }
                 else
                 {
                     //Verbindung neu Aufbauens
                     client.Connect();
+                    lblVerbunden.ForeColor = Color.FromArgb(6, 244, 0); //Grün
+                    lblVerbunden.Text = "Verbunden";
 
                 }
             }
@@ -158,6 +162,7 @@ namespace TwitchChatBot
             txtChannel1.Text = Marbles_On_Twitch_Bot.Properties.Settings.Default.Channel;
             txtUsername.Text = Marbles_On_Twitch_Bot.Properties.Settings.Default.Username;
             txtToken.Text = Marbles_On_Twitch_Bot.Properties.Settings.Default.Token;
+            timeReconnect.Start();
         }
 
         private void FrmHauptprogramm_FormClosed(object sender, FormClosedEventArgs e)
@@ -174,6 +179,8 @@ namespace TwitchChatBot
         private void CmdTrennen_Click(object sender, EventArgs e)
         {
             client.Disconnect();
+            lblVerbunden.ForeColor = Color.FromArgb(231, 13, 0); //Grün
+            lblVerbunden.Text = "Verbindung getrennt";
 
         }
 
@@ -209,6 +216,30 @@ namespace TwitchChatBot
 
             // Navigate to a URL.
             System.Diagnostics.Process.Start("https://www.twitch.tv/8lackn0va");
+        }
+
+        private void TimeReconnect_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (client.IsConnected == false)
+                {
+                    lblVerbunden.ForeColor = Color.FromArgb(231, 13, 0); //Grün
+                    lblVerbunden.Text = "Verbindung getrennt";
+                    client.Connect();
+                }
+                else
+                {
+                    lblVerbunden.ForeColor = Color.FromArgb(6, 244, 0); //Grün
+                    lblVerbunden.Text = "Verbunden";
+                }
+            }
+            catch
+            {
+
+            }
+
+
         }
     }
 }
