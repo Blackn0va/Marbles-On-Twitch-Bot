@@ -173,7 +173,7 @@
             // timeReconnect
             // 
             this.timeReconnect.Enabled = true;
-            this.timeReconnect.Interval = 90000;
+            this.timeReconnect.Interval = 60000;
             this.timeReconnect.Tick += new System.EventHandler(this.TimeReconnect_Tick);
             // 
             // label1
@@ -208,7 +208,7 @@
             // lblCounter
             // 
             this.lblCounter.AutoSize = true;
-            this.lblCounter.Location = new System.Drawing.Point(224, 81);
+            this.lblCounter.Location = new System.Drawing.Point(274, 81);
             this.lblCounter.Name = "lblCounter";
             this.lblCounter.Size = new System.Drawing.Size(19, 13);
             this.lblCounter.TabIndex = 17;
@@ -222,11 +222,11 @@
             // lblHinweis
             // 
             this.lblHinweis.AutoSize = true;
-            this.lblHinweis.Location = new System.Drawing.Point(198, 61);
+            this.lblHinweis.Location = new System.Drawing.Point(198, 80);
             this.lblHinweis.Name = "lblHinweis";
-            this.lblHinweis.Size = new System.Drawing.Size(85, 13);
+            this.lblHinweis.Size = new System.Drawing.Size(79, 13);
             this.lblHinweis.TabIndex = 18;
-            this.lblHinweis.Text = "Send Play on 10";
+            this.lblHinweis.Text = "Send Play on : ";
             // 
             // frmHauptprogramm
             // 

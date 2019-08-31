@@ -40,7 +40,6 @@ namespace TwitchChatBot
             if (txtChannel1.Text != "")
             {
                 bgwBot1.RunWorkerAsync();
-                timeReconnect.Start();
                 timerSendPlay.Start();
              }
 
@@ -110,7 +109,7 @@ namespace TwitchChatBot
         {
             try
             {
-               
+                
                 //Chat Schreiben USERNAME --> NACHRICHT <--
                 Invoke((MethodInvoker)delegate
                 {
@@ -127,12 +126,14 @@ namespace TwitchChatBot
                     if (i == 0)
                     {
                         i = 10;
+                        lblCounter.Text = i.ToString();
                         client.SendMessage(e.ChatMessage.Channel, "!play");
                         rtbChat.AppendText("------ PLAY wurde gesendet ------" + Environment.NewLine);
                         txtStatus.Text = "!play wurde gesendet";
                         lblVerbunden.ForeColor = Color.FromArgb(153, 0, 0); //Rot
                         lblVerbunden.Text = "Verbindung getrennt";
                         client.Disconnect();
+                        timeReconnect.Start();
 
                     }
 
@@ -258,14 +259,22 @@ namespace TwitchChatBot
             {
                 if (client.IsConnected == false)
                 {
-                    lblVerbunden.ForeColor = Color.FromArgb(153, 0, 0); //Rot
-                    lblVerbunden.Text = "Verbindung getrennt";
+                    lblVerbunden.ForeColor = Color.FromArgb(6, 244, 0); //Rot
+                    lblVerbunden.Text = "Verbindung hergestellt";
                     client.Connect();
                 }
                 else
                 {
                     lblVerbunden.ForeColor = Color.FromArgb(6, 244, 0); //Grün
                     lblVerbunden.Text = "Verbunden";
+                    try
+                    {
+                        client.Connect();
+                    }
+                    catch
+                    {
+
+                    }
                 }
             }
             catch
