@@ -20,7 +20,7 @@ namespace TwitchChatBot
 {
         //Client erzeugen
         TwitchClient client;
-
+        int i = 10;
 
         #region "Form initialisieren"
         public frmHauptprogramm()
@@ -40,15 +40,15 @@ namespace TwitchChatBot
             if (txtChannel1.Text != "")
             {
                 bgwBot1.RunWorkerAsync();
-            }
+                timeReconnect.Start();
+                timerSendPlay.Start();
+             }
 
 
         }
         #endregion
 
-
         #region "Backgroundworker"
-
         public void BgwBot1_DoWork(object sender, DoWorkEventArgs e)
         {
             ConnectionCredentials credentials = new ConnectionCredentials(Marbles_On_Twitch_Bot.Properties.Settings.Default.Username, Marbles_On_Twitch_Bot.Properties.Settings.Default.Token);
@@ -86,33 +86,31 @@ namespace TwitchChatBot
             {
             }
         }
-
         #endregion
 
 
-
+        #region RTB ColorChange"
         void AppendText(RichTextBox box, Color color, string text)
         {
             int start = box.TextLength;
             box.AppendText(text);
             int end = box.TextLength;
 
-            // Textbox may transform chars, so (end-start) != text.Length
             box.Select(start, end - start);
             {
                 box.SelectionColor = color;
-                // could set box.SelectionBackColor, box.SelectionFont too.
-            }
+             }
             box.SelectionLength = 0; // clear
         }
+        #endregion
 
- 
-     
-        #region "message Receive"
+
+        #region "On Events"
         private void onMessageReceived(object sender, OnMessageReceivedArgs e)
         {
             try
             {
+               
                 //Chat Schreiben USERNAME --> NACHRICHT <--
                 Invoke((MethodInvoker)delegate
                 {
@@ -121,10 +119,20 @@ namespace TwitchChatBot
 
                      if (e.ChatMessage.Message.Contains("!play"))
                     {
-                         
+                            i = i - 1;                         
+ 
+                            lblCounter.Text = i.ToString();                       
+                    }
+
+                    if (i == 0)
+                    {
+                        i = 10;
                         client.SendMessage(e.ChatMessage.Channel, "!play");
                         rtbChat.AppendText("------ PLAY wurde gesendet ------" + Environment.NewLine);
                         txtStatus.Text = "!play wurde gesendet";
+                        lblVerbunden.ForeColor = Color.FromArgb(153, 0, 0); //Rot
+                        lblVerbunden.Text = "Verbindung getrennt";
+                        client.Disconnect();
 
                     }
 
@@ -135,21 +143,21 @@ namespace TwitchChatBot
 
             }
         }
-        #endregion
- 
-        #region "On Disconnect "
-        private void onJoin(object sender, OnJoinedChannelArgs e)
+
+       
+         private void onJoin(object sender, OnJoinedChannelArgs e)
         {
             txtStatus.Text = "Verbindung erfolgreich hergestellt";
         }
 
         private void onError2(object sender, OnConnectionErrorArgs e)
         {
-            txtStatus.Text = "Fehler mit der Verbindung.. Verbindzung wird neu hergestellt";
+            txtStatus.Text = "Fehler mit der Verbindung.. Verbindung wird neu hergestellt";
             //Neu Verbindens
         }
         #endregion
 
+        #region "FormEvents"
         private void RtbChat_TextChanged(object sender, EventArgs e)
         {
             this.rtbChat.SelectionStart = rtbChat.Text.Length;
@@ -162,7 +170,7 @@ namespace TwitchChatBot
             txtChannel1.Text = Marbles_On_Twitch_Bot.Properties.Settings.Default.Channel;
             txtUsername.Text = Marbles_On_Twitch_Bot.Properties.Settings.Default.Username;
             txtToken.Text = Marbles_On_Twitch_Bot.Properties.Settings.Default.Token;
-            timeReconnect.Start();
+          
         }
 
         private void FrmHauptprogramm_FormClosed(object sender, FormClosedEventArgs e)
@@ -183,12 +191,16 @@ namespace TwitchChatBot
                 if (client.IsConnected)
                 {
                     client.Disconnect();
-                    lblVerbunden.ForeColor = Color.FromArgb(231, 13, 0); //Grün
+                    lblVerbunden.ForeColor = Color.FromArgb(153, 0, 0); //Rot
                     lblVerbunden.Text = "Verbindung getrennt";
+                    timeReconnect.Stop();
+
                 }
                 else
                 {
+                    lblVerbunden.ForeColor = Color.FromArgb(153, 0, 0); //Rot
                     lblVerbunden.Text = "Verbindung getrennt";
+                    timeReconnect.Stop();
 
                 }
             }
@@ -199,7 +211,9 @@ namespace TwitchChatBot
 
 
         }
+        #endregion
 
+        #region "Settings Speichern"
         private void TxtChannel1_TextChanged(object sender, EventArgs e)
         {
             Marbles_On_Twitch_Bot.Properties.Settings.Default.Channel = txtChannel1.Text;
@@ -217,7 +231,9 @@ namespace TwitchChatBot
             Marbles_On_Twitch_Bot.Properties.Settings.Default.Token = txtToken.Text;
             Marbles_On_Twitch_Bot.Properties.Settings.Default.Save();
         }
+        #endregion
 
+        #region "Hyperlinks"
         private void LinkToken_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.linkToken.LinkVisited = true;
@@ -233,14 +249,16 @@ namespace TwitchChatBot
             // Navigate to a URL.
             System.Diagnostics.Process.Start("https://www.twitch.tv/8lackn0va");
         }
+        #endregion
 
+        #region "Timer"
         private void TimeReconnect_Tick(object sender, EventArgs e)
         {
             try
             {
                 if (client.IsConnected == false)
                 {
-                    lblVerbunden.ForeColor = Color.FromArgb(231, 13, 0); //Grün
+                    lblVerbunden.ForeColor = Color.FromArgb(153, 0, 0); //Rot
                     lblVerbunden.Text = "Verbindung getrennt";
                     client.Connect();
                 }
@@ -254,9 +272,13 @@ namespace TwitchChatBot
             {
 
             }
-
-
         }
+
+ 
+        #endregion
+
+
+
     }
 }
 
