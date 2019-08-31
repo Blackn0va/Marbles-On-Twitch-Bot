@@ -66,9 +66,6 @@ namespace TwitchChatBot
                 if (client.IsConnected)
                 {
                     //Wenn eine verbindung besteht wird diese Getrennt und dann neu aufgebaut
-
-                    client.Disconnect();
-                    client.Connect();
                     lblVerbunden.ForeColor = Color.FromArgb(6, 244, 0); //Grün
                     lblVerbunden.Text = "Verbunden";
                 }
@@ -109,18 +106,18 @@ namespace TwitchChatBot
         {
             try
             {
-                
+
                 //Chat Schreiben USERNAME --> NACHRICHT <--
                 Invoke((MethodInvoker)delegate
                 {
                     AppendText(this.rtbChat, Color.Blue, e.ChatMessage.Username + ": ");
                     AppendText(this.rtbChat, Color.Black, e.ChatMessage.Message + Environment.NewLine);
 
-                     if (e.ChatMessage.Message.Contains("!play"))
+                    if (e.ChatMessage.Message.Contains("!play"))
                     {
-                            i = i - 1;                         
- 
-                            lblCounter.Text = i.ToString();                       
+                        i = i - 1;
+
+                        lblCounter.Text = i.ToString();
                     }
 
                     if (i == 0)
@@ -132,8 +129,12 @@ namespace TwitchChatBot
                         txtStatus.Text = "!play wurde gesendet";
                         lblVerbunden.ForeColor = Color.FromArgb(153, 0, 0); //Rot
                         lblVerbunden.Text = "Verbindung getrennt";
-                        client.Disconnect();
+                        if (client.IsConnected)
+                        {
+                            client.Disconnect();
+                        }
                         timeReconnect.Start();
+                        bgwBot1.CancelAsync();
 
                     }
 
@@ -145,8 +146,8 @@ namespace TwitchChatBot
             }
         }
 
-       
-         private void onJoin(object sender, OnJoinedChannelArgs e)
+
+        private void onJoin(object sender, OnJoinedChannelArgs e)
         {
             txtStatus.Text = "Verbindung erfolgreich hergestellt";
         }
@@ -262,6 +263,7 @@ namespace TwitchChatBot
                     lblVerbunden.ForeColor = Color.FromArgb(6, 244, 0); //Rot
                     lblVerbunden.Text = "Verbindung hergestellt";
                     client.Connect();
+                    bgwBot1.RunWorkerAsync();
                 }
                 else
                 {
@@ -269,7 +271,9 @@ namespace TwitchChatBot
                     lblVerbunden.Text = "Verbunden";
                     try
                     {
+                        client.Disconnect(); 
                         client.Connect();
+                        bgwBot1.RunWorkerAsync();
                     }
                     catch
                     {
@@ -283,11 +287,12 @@ namespace TwitchChatBot
             }
         }
 
- 
+
+
+
         #endregion
 
-
-
+ 
     }
 }
 

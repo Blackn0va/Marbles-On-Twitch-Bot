@@ -105,6 +105,7 @@
             // 
             // bgwBot1
             // 
+            this.bgwBot1.WorkerSupportsCancellation = true;
             this.bgwBot1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BgwBot1_DoWork);
             // 
             // txtUsername
