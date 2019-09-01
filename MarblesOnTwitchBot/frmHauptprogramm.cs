@@ -17,7 +17,7 @@ namespace TwitchChatBot
 #endregion
 {
     public partial class frmHauptprogramm : Form
-{
+    {
         //Client erzeugen
         TwitchClient client;
         int i = 10;
@@ -41,7 +41,7 @@ namespace TwitchChatBot
             {
                 bgwBot1.RunWorkerAsync();
                 timerSendPlay.Start();
-             }
+            }
 
 
         }
@@ -61,10 +61,13 @@ namespace TwitchChatBot
 
                 client.OnMessageReceived += onMessageReceived; // Bei Erhalt einer Nachricht
                 client.OnJoinedChannel += onJoin;
+                
 
 
                 if (client.IsConnected)
                 {
+                    client.Disconnect();
+                    client.Connect();
                     //Wenn eine verbindung besteht wird diese Getrennt und dann neu aufgebaut
                     lblVerbunden.ForeColor = Color.FromArgb(6, 244, 0); //Grün
                     lblVerbunden.Text = "Verbunden";
@@ -95,7 +98,7 @@ namespace TwitchChatBot
             box.Select(start, end - start);
             {
                 box.SelectionColor = color;
-             }
+            }
             box.SelectionLength = 0; // clear
         }
         #endregion
@@ -120,23 +123,7 @@ namespace TwitchChatBot
                         lblCounter.Text = i.ToString();
                     }
 
-                    if (i == 0)
-                    {
-                        i = 10;
-                        lblCounter.Text = i.ToString();
-                        client.SendMessage(e.ChatMessage.Channel, "!play");
-                        rtbChat.AppendText("------ PLAY wurde gesendet ------" + Environment.NewLine);
-                        txtStatus.Text = "!play wurde gesendet";
-                        lblVerbunden.ForeColor = Color.FromArgb(153, 0, 0); //Rot
-                        lblVerbunden.Text = "Verbindung getrennt";
-                        if (client.IsConnected)
-                        {
-                            client.Disconnect();
-                        }
-                        timeReconnect.Start();
-                        bgwBot1.CancelAsync();
 
-                    }
 
                 });
             }
@@ -146,6 +133,15 @@ namespace TwitchChatBot
             }
         }
 
+        private void OnSend(object sender, OnMessageSentArgs e)
+        {
+            client.SendMessage(e.SentMessage.Channel, "!play");
+            rtbChat.AppendText("------ PLAY wurde gesendet ------" + Environment.NewLine);
+            txtStatus.Text = "!play wurde gesendet";
+
+            System.Threading.Thread.Sleep(30000);
+
+        }
 
         private void onJoin(object sender, OnJoinedChannelArgs e)
         {
@@ -165,7 +161,30 @@ namespace TwitchChatBot
             this.rtbChat.SelectionStart = rtbChat.Text.Length;
             this.rtbChat.ScrollToCaret();
 
+
+            if (i == 0)
+            {
+                i = 10;
+                lblCounter.Text = i.ToString();
+
+                if (client.IsConnected)
+                {
+                    client.OnMessageSent += OnSend;
+
+                }
+                else
+                {
+                    client.Connect();
+                    client.OnMessageSent += OnSend;
+
+                }
+
+            }
+
+
         }
+ 
+
 
         private void FrmHauptprogramm_Load(object sender, EventArgs e)
         {
@@ -210,7 +229,6 @@ namespace TwitchChatBot
             {
 
             }
-
 
         }
         #endregion
@@ -263,8 +281,7 @@ namespace TwitchChatBot
                     lblVerbunden.ForeColor = Color.FromArgb(6, 244, 0); //Rot
                     lblVerbunden.Text = "Verbindung hergestellt";
                     client.Connect();
-                    bgwBot1.RunWorkerAsync();
-                }
+                 }
                 else
                 {
                     lblVerbunden.ForeColor = Color.FromArgb(6, 244, 0); //Grün
@@ -273,8 +290,7 @@ namespace TwitchChatBot
                     {
                         client.Disconnect(); 
                         client.Connect();
-                        bgwBot1.RunWorkerAsync();
-                    }
+                     }
                     catch
                     {
 
