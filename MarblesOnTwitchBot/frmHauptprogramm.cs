@@ -40,7 +40,6 @@ namespace TwitchChatBot
             if (txtChannel1.Text != "")
             {
                 bgwBot1.RunWorkerAsync();
-                timerSendPlay.Start();
             }
 
 
@@ -55,13 +54,12 @@ namespace TwitchChatBot
 
             try
             {
-
-
                 client.Initialize(credentials, txtChannel1.Text);
 
                 client.OnMessageReceived += onMessageReceived; // Bei Erhalt einer Nachricht
                 client.OnJoinedChannel += onJoin;
-                
+                client.OnConnectionError += ConnectionError;
+                client.OnUserTimedout += OnTimed;
 
 
                 if (client.IsConnected)
@@ -87,29 +85,11 @@ namespace TwitchChatBot
         }
         #endregion
 
-
-        #region RTB ColorChange"
-        void AppendText(RichTextBox box, Color color, string text)
-        {
-            int start = box.TextLength;
-            box.AppendText(text);
-            int end = box.TextLength;
-
-            box.Select(start, end - start);
-            {
-                box.SelectionColor = color;
-            }
-            box.SelectionLength = 0; // clear
-        }
-        #endregion
-
-
         #region "On Events"
         private void onMessageReceived(object sender, OnMessageReceivedArgs e)
         {
             try
             {
-
                 //Chat Schreiben USERNAME --> NACHRICHT <--
                 Invoke((MethodInvoker)delegate
                 {
@@ -119,12 +99,23 @@ namespace TwitchChatBot
                     if (e.ChatMessage.Message.Contains("!play"))
                     {
                         i = i - 1;
-
                         lblCounter.Text = i.ToString();
+                        if (i == 0)
+                        {
+                            i = 10;
+                            lblCounter.Text = i.ToString();
+                            client.SendMessage(e.ChatMessage.Channel, "!play");
+                            rtbChat.AppendText("------ PLAY wurde gesendet ------" + Environment.NewLine);
+                            txtStatus.Text = "!play wurde gesendet";
+                            client.Disconnect();
+                            lblVerbunden.ForeColor = Color.FromArgb(153, 0, 0); //Rot
+                            lblVerbunden.Text = "Verbindung getrennt";
+                            bgwBot1.CancelAsync();
+                            bgwBot1.Dispose();
+                            timeReconnect.Start();
+                            GC.Collect();
+                        }
                     }
-
-
-
                 });
             }
             catch
@@ -133,14 +124,38 @@ namespace TwitchChatBot
             }
         }
 
-        private void OnSend(object sender, OnMessageSentArgs e)
+        private void OnTimed(object sender, OnUserTimedoutArgs e)
         {
-            client.SendMessage(e.SentMessage.Channel, "!play");
-            rtbChat.AppendText("------ PLAY wurde gesendet ------" + Environment.NewLine);
-            txtStatus.Text = "!play wurde gesendet";
+            if (client.IsConnected == false)
+            {
+                try
+                {
+                     client.Reconnect();
+                }
+                catch
+                {
 
-            System.Threading.Thread.Sleep(30000);
+                }
+            }
+            else
+            {
+                try
+                {
+                    client.Reconnect();
+                 }
+                catch
+                {
 
+                }
+
+            }
+        }
+        private void ConnectionError(object sender, OnConnectionErrorArgs e)
+        {
+            if(client.IsConnected == false)
+            {
+                client.Connect();
+            }
         }
 
         private void onJoin(object sender, OnJoinedChannelArgs e)
@@ -160,27 +175,6 @@ namespace TwitchChatBot
         {
             this.rtbChat.SelectionStart = rtbChat.Text.Length;
             this.rtbChat.ScrollToCaret();
-
-
-            if (i == 0)
-            {
-                i = 10;
-                lblCounter.Text = i.ToString();
-
-                if (client.IsConnected)
-                {
-                    client.OnMessageSent += OnSend;
-
-                }
-                else
-                {
-                    client.Connect();
-                    client.OnMessageSent += OnSend;
-
-                }
-
-            }
-
 
         }
  
@@ -278,6 +272,7 @@ namespace TwitchChatBot
             {
                 if (client.IsConnected == false)
                 {
+                    bgwBot1.RunWorkerAsync();
                     lblVerbunden.ForeColor = Color.FromArgb(6, 244, 0); //Rot
                     lblVerbunden.Text = "Verbindung hergestellt";
                     client.Connect();
@@ -285,9 +280,10 @@ namespace TwitchChatBot
                 else
                 {
                     lblVerbunden.ForeColor = Color.FromArgb(6, 244, 0); //Grün
-                    lblVerbunden.Text = "Verbunden";
+                    lblVerbunden.Text = "Verbindung hergestellt";
                     try
                     {
+                        bgwBot1.RunWorkerAsync();
                         client.Disconnect(); 
                         client.Connect();
                      }
@@ -302,13 +298,22 @@ namespace TwitchChatBot
 
             }
         }
-
-
-
-
         #endregion
 
- 
+        #region RTB ColorChange"
+        void AppendText(RichTextBox box, Color color, string text)
+        {
+            int start = box.TextLength;
+            box.AppendText(text);
+            int end = box.TextLength;
+
+            box.Select(start, end - start);
+            {
+                box.SelectionColor = color;
+            }
+            box.SelectionLength = 0; // clear
+        }
+        #endregion
     }
 }
 
