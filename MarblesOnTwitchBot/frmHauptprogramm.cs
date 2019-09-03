@@ -64,9 +64,8 @@ namespace TwitchChatBot
 
                 if (client.IsConnected)
                 {
-                    client.Disconnect();
-                    client.Connect();
-                    //Wenn eine verbindung besteht wird diese Getrennt und dann neu aufgebaut
+                    client.Reconnect();
+                     //Wenn eine verbindung besteht wird diese Getrennt und dann neu aufgebaut
                     lblVerbunden.ForeColor = Color.FromArgb(6, 244, 0); //Grün
                     lblVerbunden.Text = "Verbunden";
                 }
@@ -155,6 +154,10 @@ namespace TwitchChatBot
             if(client.IsConnected == false)
             {
                 client.Connect();
+            }
+            else
+            {
+                client.Reconnect();
             }
         }
 
@@ -284,8 +287,7 @@ namespace TwitchChatBot
                     try
                     {
                         bgwBot1.RunWorkerAsync();
-                        client.Disconnect(); 
-                        client.Connect();
+                        client.Reconnect(); 
                      }
                     catch
                     {
