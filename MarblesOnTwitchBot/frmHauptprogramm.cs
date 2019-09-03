@@ -140,6 +140,7 @@ namespace TwitchChatBot
             {
                 try
                 {
+   
                     client.Reconnect();
                  }
                 catch
@@ -159,6 +160,7 @@ namespace TwitchChatBot
             else
             {
                 client.Reconnect();
+ 
             }
         }
 
@@ -287,8 +289,7 @@ namespace TwitchChatBot
                     lblVerbunden.Text = "Verbindung hergestellt";
                     try
                     {
-                        bgwBot1.RunWorkerAsync();
-                        client.Reconnect(); 
+                         client.Reconnect();
                      }
                     catch
                     {
