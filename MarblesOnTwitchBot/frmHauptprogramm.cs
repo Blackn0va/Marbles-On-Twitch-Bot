@@ -20,7 +20,8 @@ namespace TwitchChatBot
     {
         //Client erzeugen
         TwitchClient client;
-        int i = 10;
+        int i;
+
 
         #region "Form initialisieren"
         public frmHauptprogramm()
@@ -101,7 +102,7 @@ namespace TwitchChatBot
                         lblCounter.Text = i.ToString();
                         if (i == 0)
                         {
-                            i = 10;
+                            i = (int)numCounter.Value;
                             lblCounter.Text = i.ToString();
                             client.SendMessage(e.ChatMessage.Channel, "!play");
                             rtbChat.AppendText("------ PLAY wurde gesendet ------" + Environment.NewLine);
@@ -191,6 +192,7 @@ namespace TwitchChatBot
             txtChannel1.Text = Marbles_On_Twitch_Bot.Properties.Settings.Default.Channel;
             txtUsername.Text = Marbles_On_Twitch_Bot.Properties.Settings.Default.Username;
             txtToken.Text = Marbles_On_Twitch_Bot.Properties.Settings.Default.Token;
+            i = (int)numCounter.Value;
           
         }
 
@@ -318,6 +320,12 @@ namespace TwitchChatBot
             box.SelectionLength = 0; // clear
         }
         #endregion
+
+        private void NumCounter_ValueChanged(object sender, EventArgs e)
+        {
+            i = (int)numCounter.Value;
+            lblCounter.Text = i.ToString();
+        }
     }
 }
 
