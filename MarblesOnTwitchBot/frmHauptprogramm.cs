@@ -129,7 +129,7 @@ namespace TwitchChatBot
             {
                 try
                 {
-                     client.Reconnect();
+                     client.Connect();
                 }
                 catch
                 {
@@ -151,6 +151,7 @@ namespace TwitchChatBot
         }
         private void ConnectionError(object sender, OnConnectionErrorArgs e)
         {
+            txtStatus.Text = "FEHLER";
             if(client.IsConnected == false)
             {
                 client.Connect();
