@@ -129,8 +129,7 @@ namespace Marbles_On_Twitch_Bot
         #region "On Timer Tick"
         private void TimeReconnect_Tick(object sender, EventArgs e)
         {
-            MessageBox.Show("ASKD");
-            InitializeBackgroundWorker();
+             InitializeBackgroundWorker();
 
             backgroundWorker1.RunWorkerAsync();
         }
