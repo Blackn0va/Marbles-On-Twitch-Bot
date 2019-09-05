@@ -35,7 +35,7 @@ namespace Marbles_On_Twitch_Bot
         private System.Windows.Forms.Label lblVerbunden;
         private System.Windows.Forms.Button cmdTrennen;
         private System.Windows.Forms.Label lblCounter;
-        private System.Windows.Forms.Timer timerSendPlay;
+        private System.Windows.Forms.Timer timerControll;
         private System.Windows.Forms.Label lblHinweis;
         private System.Windows.Forms.NumericUpDown numCounter;
         private System.Windows.Forms.Label lblViewer;
@@ -48,8 +48,8 @@ namespace Marbles_On_Twitch_Bot
         public InvokeThreadSafeForm()
         {
             InitializeComponent();
-            InitializeBackgroundWorker();
-
+            timerControll.Start();
+            timeReconnect.Stop();
             txtChannel1.Text = Marbles_On_Twitch_Bot.Properties.Settings.Default.Channel;
             txtUsername.Text = Marbles_On_Twitch_Bot.Properties.Settings.Default.Username;
             txtToken.Text = Marbles_On_Twitch_Bot.Properties.Settings.Default.Token;
@@ -74,21 +74,24 @@ namespace Marbles_On_Twitch_Bot
         #region "Klick Verbinden / Trennen"
         private void cmdVerbinden_Click(System.Object sender, System.EventArgs e)
         {
+            InitializeBackgroundWorker();
             backgroundWorker1.RunWorkerAsync();
         }
 
         private void cmdTrennen_Click(System.Object sender, System.EventArgs e)
         {
             backgroundWorker1.CancelAsync();
+            backgroundWorker1.Dispose();
         }
         #endregion
 
         #region "Bgw DoWork"
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
+     
             ConnectionCredentials credentials = new ConnectionCredentials(Marbles_On_Twitch_Bot.Properties.Settings.Default.Username, Marbles_On_Twitch_Bot.Properties.Settings.Default.Token);
             client = new TwitchClient();
- 
+            
             try
             {
                 i = (int)numCounter.Value; 
@@ -96,25 +99,14 @@ namespace Marbles_On_Twitch_Bot
                 client.OnMessageReceived += onMessageReceived; // Bei Erhalt einer Nachricht
                  client.OnJoinedChannel += onJoin;
                 client.OnConnectionError += ConnectionError;
-                client.OnUserTimedout += OnTimed;
                 client.OnChatCommandReceived += OnChatCommandReceived;
  
- 
 
-                if (client.IsConnected == true)
-                {
-                    //Wenn eine verbindung besteht wird diese Getrennt und dann neu aufgebaut
-                    lblVerbunden.ForeColor = Color.FromArgb(6, 244, 0); //Grün
-                    lblVerbunden.Text = "Verbunden";
-                }
-                else
-                {
-                    //Verbindung neu Aufbauens
-                    client.Connect();
-                      lblVerbunden.ForeColor = Color.FromArgb(6, 244, 0); //Grün
-                    lblVerbunden.Text = "Verbunden";
 
-                }
+                //Verbindung neu Aufbauens
+                client.Connect();
+                lblVerbunden.ForeColor = Color.FromArgb(6, 244, 0); //Grün
+                lblVerbunden.Text = "Verbunden";
             }
             catch
             {
@@ -131,13 +123,15 @@ namespace Marbles_On_Twitch_Bot
         #region "bgw ProgressChanged"
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-
         }
         #endregion
 
         #region "On Timer Tick"
         private void TimeReconnect_Tick(object sender, EventArgs e)
         {
+            MessageBox.Show("ASKD");
+            InitializeBackgroundWorker();
+
             backgroundWorker1.RunWorkerAsync();
         }
         #endregion
@@ -188,35 +182,15 @@ namespace Marbles_On_Twitch_Bot
 
                 if (i == 0)
                 {
+ 
                     // Play in den Chat senden.
                     client.SendMessage(e.ChatMessage.Channel, "!play");
                     i = (int)numCounter.Value;
                     client.Disconnect();
                     backgroundWorker1.CancelAsync();
                     backgroundWorker1.Dispose();
-                    timeReconnect.Start();
                 }
 
-            }
-            catch
-            {
-
-            }
-        }
-        #endregion
-
-        #region "On Timed"
-        private void OnTimed(object sender, OnUserTimedoutArgs e)
-        {
-            try
-            {
-                if (client.IsConnected == false)
-                {
-                    //client.Connect();
-                }
-                else
-                {
-                }
             }
             catch
             {
@@ -230,7 +204,7 @@ namespace Marbles_On_Twitch_Bot
         {
             Invoke((MethodInvoker)delegate
             {
-                txtStatus.ForeColor = Color.FromArgb(6, 244, 0); //Grün
+                txtStatus.ForeColor = Color.FromArgb(153,0,0); //Grün
                 txtStatus.Text = "Verbindung beendet";
             });
         }
@@ -255,6 +229,16 @@ namespace Marbles_On_Twitch_Bot
                 txtStatus.ForeColor = Color.FromArgb(152,0,0); //Grün
                 txtStatus.Text = "Fehler mit der Verbindung.. Verbindung wird neu hergestellt";
             });
+        }
+        #endregion
+
+        #region "Timer Kontrolle"
+        private void TimerControll_Tick(object sender, EventArgs e)
+        {
+            if (txtStatus.Text.Contains("beendet"))
+            {
+                timeReconnect.Start();
+            }
         }
         #endregion
 
@@ -316,7 +300,7 @@ namespace Marbles_On_Twitch_Bot
             this.lblVerbunden = new System.Windows.Forms.Label();
             this.cmdTrennen = new System.Windows.Forms.Button();
             this.lblCounter = new System.Windows.Forms.Label();
-            this.timerSendPlay = new System.Windows.Forms.Timer(this.components);
+            this.timerControll = new System.Windows.Forms.Timer(this.components);
             this.lblHinweis = new System.Windows.Forms.Label();
             this.numCounter = new System.Windows.Forms.NumericUpDown();
             this.lblViewer = new System.Windows.Forms.Label();
@@ -490,10 +474,11 @@ namespace Marbles_On_Twitch_Bot
             this.lblCounter.TabIndex = 17;
             this.lblCounter.Text = "10";
             // 
-            // timerSendPlay
+            // timerControll
             // 
-            this.timerSendPlay.Enabled = true;
-            this.timerSendPlay.Interval = 1000;
+            this.timerControll.Enabled = true;
+            this.timerControll.Interval = 1000;
+            this.timerControll.Tick += new System.EventHandler(this.TimerControll_Tick);
             // 
             // lblHinweis
             // 
@@ -612,6 +597,10 @@ namespace Marbles_On_Twitch_Bot
             // Navigate to a URL.
             System.Diagnostics.Process.Start("https://www.twitch.tv/8lackn0va");
         }
+
+
         #endregion
+
+
     }
 }

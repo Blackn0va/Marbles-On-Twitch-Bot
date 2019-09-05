@@ -166,4 +166,3 @@ C:\Users\h.barthelmes\Desktop\Marbles-On-Twitch-Bot\MarblesOnTwitchBot\obj\Relea
 C:\Users\h.barthelmes\Desktop\Marbles-On-Twitch-Bot\MarblesOnTwitchBot\obj\Release\Marbles On Twitch Bot.exe
 C:\Users\h.barthelmes\Desktop\Marbles-On-Twitch-Bot\MarblesOnTwitchBot\obj\Release\Marbles On Twitch Bot.pdb
 C:\Users\h.barthelmes\Desktop\Marbles-On-Twitch-Bot\MarblesOnTwitchBot\obj\Release\Marbles_On_Twitch_Bot.InvokeThreadSafeForm.resources
-C:\Users\h.barthelmes\Desktop\Marbles-On-Twitch-Bot\MarblesOnTwitchBot\obj\Release\Marbles On Twitch Bot.csprojAssemblyReference.cache
