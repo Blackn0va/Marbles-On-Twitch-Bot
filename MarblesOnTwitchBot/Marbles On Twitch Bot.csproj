@@ -35,6 +35,9 @@
   <PropertyGroup>
     <ApplicationIcon>Resources\marbles_39496.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Marbles_On_Twitch_Bot.InvokeThreadSafeForm</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Extensions.Configuration, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Configuration.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll</HintPath>
@@ -176,16 +179,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmHauptprogramm.cs">
+    <Compile Include="InvokeThreadSafeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmHauptprogramm.Designer.cs">
-      <DependentUpon>frmHauptprogramm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frmHauptprogramm.resx">
-      <DependentUpon>frmHauptprogramm.cs</DependentUpon>
+    <EmbeddedResource Include="InvokeThreadSafeForm.resx">
+      <DependentUpon>InvokeThreadSafeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

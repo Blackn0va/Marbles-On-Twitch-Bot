@@ -159,10 +159,11 @@ C:\Users\h.barthelmes\Desktop\Marbles-On-Twitch-Bot\MarblesOnTwitchBot\bin\Relea
 C:\Users\h.barthelmes\Desktop\Marbles-On-Twitch-Bot\MarblesOnTwitchBot\bin\Release\System.Memory.xml
 C:\Users\h.barthelmes\Desktop\Marbles-On-Twitch-Bot\MarblesOnTwitchBot\bin\Release\System.Numerics.Vectors.xml
 C:\Users\h.barthelmes\Desktop\Marbles-On-Twitch-Bot\MarblesOnTwitchBot\bin\Release\System.Runtime.CompilerServices.Unsafe.xml
-C:\Users\h.barthelmes\Desktop\Marbles-On-Twitch-Bot\MarblesOnTwitchBot\obj\Release\TwitchChatBot.frmHauptprogramm.resources
 C:\Users\h.barthelmes\Desktop\Marbles-On-Twitch-Bot\MarblesOnTwitchBot\obj\Release\Marbles_On_Twitch_Bot.Properties.Resources.resources
 C:\Users\h.barthelmes\Desktop\Marbles-On-Twitch-Bot\MarblesOnTwitchBot\obj\Release\Marbles On Twitch Bot.csproj.GenerateResource.cache
 C:\Users\h.barthelmes\Desktop\Marbles-On-Twitch-Bot\MarblesOnTwitchBot\obj\Release\Marbles On Twitch Bot.csproj.CoreCompileInputs.cache
 C:\Users\h.barthelmes\Desktop\Marbles-On-Twitch-Bot\MarblesOnTwitchBot\obj\Release\Marbles On Twitch Bot.csproj.CopyComplete
 C:\Users\h.barthelmes\Desktop\Marbles-On-Twitch-Bot\MarblesOnTwitchBot\obj\Release\Marbles On Twitch Bot.exe
 C:\Users\h.barthelmes\Desktop\Marbles-On-Twitch-Bot\MarblesOnTwitchBot\obj\Release\Marbles On Twitch Bot.pdb
+C:\Users\h.barthelmes\Desktop\Marbles-On-Twitch-Bot\MarblesOnTwitchBot\obj\Release\Marbles_On_Twitch_Bot.InvokeThreadSafeForm.resources
+C:\Users\h.barthelmes\Desktop\Marbles-On-Twitch-Bot\MarblesOnTwitchBot\obj\Release\Marbles On Twitch Bot.csprojAssemblyReference.cache

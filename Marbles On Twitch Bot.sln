@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29123.88
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marbles On Twitch Bot", "MarblesOnTwitchBot\Marbles On Twitch Bot.csproj", "{33A35A70-3507-4DC6-BAAC-A122999773BE}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Marbles On Twitch Bot Setup", "Marbles On Twitch Bot Setup\Marbles On Twitch Bot Setup.vdproj", "{ACC80E43-DE92-43A3-B08E-0196A61F95A2}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MarblesBot-Setup", "MarblesBot-Setup\MarblesBot-Setup.vdproj", "{E1F227E9-7AFA-4DCF-8702-1580F2242B43}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,8 +17,8 @@ Global
 		{33A35A70-3507-4DC6-BAAC-A122999773BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33A35A70-3507-4DC6-BAAC-A122999773BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33A35A70-3507-4DC6-BAAC-A122999773BE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ACC80E43-DE92-43A3-B08E-0196A61F95A2}.Debug|Any CPU.ActiveCfg = Debug
-		{ACC80E43-DE92-43A3-B08E-0196A61F95A2}.Release|Any CPU.ActiveCfg = Release
+		{E1F227E9-7AFA-4DCF-8702-1580F2242B43}.Debug|Any CPU.ActiveCfg = Debug
+		{E1F227E9-7AFA-4DCF-8702-1580F2242B43}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
