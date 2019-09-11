@@ -100,7 +100,7 @@ namespace Marbles_On_Twitch_Bot
                  client.OnJoinedChannel += onJoin;
                 client.OnConnectionError += ConnectionError;
                 client.OnChatCommandReceived += OnChatCommandReceived;
- 
+  
 
 
                 //Verbindung neu Aufbauens
@@ -129,9 +129,13 @@ namespace Marbles_On_Twitch_Bot
         #region "On Timer Tick"
         private void TimeReconnect_Tick(object sender, EventArgs e)
         {
-             InitializeBackgroundWorker();
-
-            backgroundWorker1.RunWorkerAsync();
+            i = (int)numCounter.Value;
+ 
+            Invoke((MethodInvoker)delegate
+            {
+                lblCounter.Text = i.ToString();
+            });
+            timeReconnect.Stop();
         }
         #endregion
 
@@ -149,6 +153,8 @@ namespace Marbles_On_Twitch_Bot
             lblCounter.Text = numCounter.Value.ToString();
         }
         #endregion
+
+ 
 
         #region "On ChatCommandReceived"
         private void OnChatCommandReceived(object sender, TwitchLib.Client.Events.OnChatCommandReceivedArgs e)
@@ -170,8 +176,6 @@ namespace Marbles_On_Twitch_Bot
         #region "On Message Received"
         private void onMessageReceived(object sender, OnMessageReceivedArgs e)
         {
-            try
-            {
                 //Chat Schreiben USERNAME --> NACHRICHT <--
                 Invoke((MethodInvoker)delegate
                 {
@@ -181,20 +185,11 @@ namespace Marbles_On_Twitch_Bot
 
                 if (i == 0)
                 {
- 
                     // Play in den Chat senden.
                     client.SendMessage(e.ChatMessage.Channel, "!play");
-                    i = (int)numCounter.Value;
-                    client.Disconnect();
-                    backgroundWorker1.CancelAsync();
-                    backgroundWorker1.Dispose();
                 }
 
-            }
-            catch
-            {
 
-            }
         }
         #endregion
 
@@ -234,7 +229,7 @@ namespace Marbles_On_Twitch_Bot
         #region "Timer Kontrolle"
         private void TimerControll_Tick(object sender, EventArgs e)
         {
-            if (txtStatus.Text.Contains("beendet"))
+            if (i < 0)
             {
                 timeReconnect.Start();
             }
@@ -476,7 +471,7 @@ namespace Marbles_On_Twitch_Bot
             // timerControll
             // 
             this.timerControll.Enabled = true;
-            this.timerControll.Interval = 1000;
+            this.timerControll.Interval = 20;
             this.timerControll.Tick += new System.EventHandler(this.TimerControll_Tick);
             // 
             // lblHinweis
@@ -565,6 +560,7 @@ namespace Marbles_On_Twitch_Bot
             this.MinimumSize = new System.Drawing.Size(992, 450);
             this.Name = "InvokeThreadSafeForm";
             this.Text = "Marbles on TwitchBot";
+            this.Load += new System.EventHandler(this.InvokeThreadSafeForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numCounter)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -598,8 +594,12 @@ namespace Marbles_On_Twitch_Bot
         }
 
 
+
         #endregion
 
-
+        private void InvokeThreadSafeForm_Load(object sender, EventArgs e)
+        {
+            timerControll.Start();
+        }
     }
 }
