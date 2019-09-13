@@ -80,6 +80,9 @@ namespace Marbles_On_Twitch_Bot
 
         private void cmdTrennen_Click(System.Object sender, System.EventArgs e)
         {
+            if (client.IsConnected)
+                client.LeaveChannel(txtChannel1.Text);
+            client.Disconnect();
             backgroundWorker1.CancelAsync();
             backgroundWorker1.Dispose();
         }
@@ -100,7 +103,7 @@ namespace Marbles_On_Twitch_Bot
                  client.OnJoinedChannel += onJoin;
                 client.OnConnectionError += ConnectionError;
                 client.OnChatCommandReceived += OnChatCommandReceived;
-  
+                client.OnHostingStarted += OnHostingStarted;
 
 
                 //Verbindung neu Aufbauens
@@ -139,6 +142,20 @@ namespace Marbles_On_Twitch_Bot
         }
         #endregion
 
+        #region "On Hosting STartet"
+        private void OnHostingStarted(object sender, OnHostingStartedArgs e)
+        {
+            // Wenn der Host startet soll die verbindung beendet werden
+            if (client.IsConnected)
+                client.LeaveChannel(txtChannel1.Text);
+            client.Disconnect();
+            Invoke((MethodInvoker)delegate
+            {
+               lblStatus.Text = "Verbindung beendet";
+            });
+        }
+        #endregion
+
         #region "RTB Autoscroll"
         private void rtbChat_TextChanged(object sender, EventArgs e)
         {
@@ -153,8 +170,6 @@ namespace Marbles_On_Twitch_Bot
             lblCounter.Text = numCounter.Value.ToString();
         }
         #endregion
-
- 
 
         #region "On ChatCommandReceived"
         private void OnChatCommandReceived(object sender, TwitchLib.Client.Events.OnChatCommandReceivedArgs e)
@@ -597,9 +612,11 @@ namespace Marbles_On_Twitch_Bot
 
         #endregion
 
+        #region "Form Load"
         private void InvokeThreadSafeForm_Load(object sender, EventArgs e)
         {
             timerControll.Start();
         }
+        #endregion
     }
 }
