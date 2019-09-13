@@ -104,6 +104,7 @@ namespace Marbles_On_Twitch_Bot
                 client.OnConnectionError += ConnectionError;
                 client.OnChatCommandReceived += OnChatCommandReceived;
                 client.OnHostingStarted += OnHostingStarted;
+                client.OnLeftChannel += OnLeftChannel;
 
 
                 //Verbindung neu Aufbauens
@@ -126,6 +127,15 @@ namespace Marbles_On_Twitch_Bot
         #region "bgw ProgressChanged"
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
+        }
+        #endregion
+
+        #region "OnLeftChannel"
+        private void OnLeftChannel(object sender, OnLeftChannelArgs e)
+        {
+            //Wenn CHannel verlassen wurde, neu beitreten.
+            if (client.IsConnected)
+                client.JoinChannel(txtChannel1.Text);
         }
         #endregion
 
