@@ -9,12 +9,12 @@ using TwitchLib.Client.Events;
 using TwitchLib.Client.Models;
 using TwitchLib.PubSub;
 using TwitchLib.PubSub.Events;
-
+using TwitchLib.Communication.Interfaces;
 namespace Marbles_On_Twitch_Bot
 {
     public class InvokeThreadSafeForm : System.Windows.Forms.Form
     {
-        TwitchClient client;
+         TwitchClient client;
         int i = 0;
  
         #region "Deklarationen f. Form"
@@ -41,6 +41,7 @@ namespace Marbles_On_Twitch_Bot
         private System.Windows.Forms.Label lblViewer;
         private System.Windows.Forms.Label lblViewerCounter;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private Label lblDebug;
         private System.ComponentModel.IContainer components = null;
         #endregion
 
@@ -94,27 +95,45 @@ namespace Marbles_On_Twitch_Bot
      
             ConnectionCredentials credentials = new ConnectionCredentials(Marbles_On_Twitch_Bot.Properties.Settings.Default.Username, Marbles_On_Twitch_Bot.Properties.Settings.Default.Token);
             client = new TwitchClient();
-            
-            try
-            {
+             
+              
+
                 i = (int)numCounter.Value; 
+            if(!client.IsInitialized)
                 client.Initialize(credentials, txtChannel1.Text);
                 client.OnMessageReceived += onMessageReceived; // Bei Erhalt einer Nachricht
-                 client.OnJoinedChannel += onJoin;
+                client.OnJoinedChannel += onJoin;
                 client.OnConnectionError += ConnectionError;
                 client.OnChatCommandReceived += OnChatCommandReceived;
                 client.OnHostingStarted += OnHostingStarted;
                 client.OnLeftChannel += OnLeftChannel;
+                client.OnNewSubscriber += OnNewSubScriber;
+                client.OnReSubscriber += OnResubscriber;
+                client.OnGiftedSubscription += OnGiftedSubscrib;
+                client.OnAnonGiftedSubscription += OnAnonGiftedSubscib;
+                client.OnChannelStateChanged += OnChannelStateChanged;
+                client.OnConnected += OnConnected;
+                client.OnChatColorChanged += OnChatColorChanged;
+                client.OnCommunitySubscription += OnCommunitySub;
+                client.OnLog += OnLog;
+                client.OnUnaccountedFor += OnUnaccountedFor;
+                client.OnUserTimedout += OnUserTimedout;
+                client.OnVIPsReceived += OnVipReceived;
+                    
+            
 
+            //Verbindung neu Aufbauens
+            if(!client.IsConnected)
+            client.Connect();
+            
 
-                //Verbindung neu Aufbauens
-                client.Connect();
+            Invoke((MethodInvoker)delegate
+            {
                 lblVerbunden.ForeColor = Color.FromArgb(6, 244, 0); //Grün
                 lblVerbunden.Text = "Verbunden";
-            }
-            catch
-            {
-            }
+            });
+
+
         }
         #endregion
 
@@ -127,6 +146,99 @@ namespace Marbles_On_Twitch_Bot
         #region "bgw ProgressChanged"
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
+        }
+        #endregion
+
+        #region "On VIP Received"
+        private void OnVipReceived(object sender, OnVIPsReceivedArgs e)
+        {
+
+        }
+        #endregion
+
+        #region "OOnUserTimedout"
+        private void OnUserTimedout(object sender, OnUserTimedoutArgs e)
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                lblVerbunden.ForeColor = Color.FromArgb(6, 244, 0); //Grün
+                lblDebug.Text = e.UserTimeout.Channel;
+            });
+        }
+        #endregion
+
+        #region "OnUnaccountedFor"
+        private void OnUnaccountedFor(object sender, OnUnaccountedForArgs e)
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                lblVerbunden.ForeColor = Color.FromArgb(6, 244, 0); //Grün
+                lblDebug.Text = e.Channel;
+            });
+        }
+        #endregion
+
+        #region "On Log"
+        private void OnLog(object sender, TwitchLib.Client.Events.OnLogArgs e)
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                lblDebug.ForeColor = Color.FromArgb(0, 0, 0); //Grün
+                lblDebug.Text = e.Data;
+            });
+        }
+        #endregion
+
+        #region "on CommunitySubscrib"
+        private void OnCommunitySub(object sedner, OnCommunitySubscriptionArgs e)
+        {
+            
+        }
+        #endregion
+        #region "OnChatColorChanged"
+        private void OnChatColorChanged(object sender, OnChatColorChangedArgs e)
+        {
+        }
+        #endregion
+        #region "On Connected"
+        private void OnConnected(object sender, OnConnectedArgs e)
+        {
+        }
+        #endregion
+
+        #region "OnChannelStateChanged"
+        private void OnChannelStateChanged(object sender, OnChannelStateChangedArgs e)
+        {
+
+        }
+        #endregion
+
+
+        #region "OnAnonGiftedSubscib"
+        private void OnAnonGiftedSubscib(object sender, OnAnonGiftedSubscriptionArgs e)
+        {
+
+        }
+        #endregion
+
+        #region On Gifted Subscription"
+        private void OnGiftedSubscrib(object Sender, OnGiftedSubscriptionArgs e)
+        {
+
+        }
+        #endregion
+
+        #region 
+        private void OnResubscriber(object sender, OnReSubscriberArgs e)
+        {
+
+        }
+        #endregion
+
+        #region "On New Subscriber"
+        private void OnNewSubScriber(object sender, OnNewSubscriberArgs e)
+        {
+
         }
         #endregion
 
@@ -324,6 +436,7 @@ namespace Marbles_On_Twitch_Bot
             this.numCounter = new System.Windows.Forms.NumericUpDown();
             this.lblViewer = new System.Windows.Forms.Label();
             this.lblViewerCounter = new System.Windows.Forms.Label();
+            this.lblDebug = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numCounter)).BeginInit();
             this.SuspendLayout();
             // 
@@ -335,19 +448,19 @@ namespace Marbles_On_Twitch_Bot
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(26, 10);
-            this.lblStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblStatus.Location = new System.Drawing.Point(13, 5);
+            this.lblStatus.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(79, 25);
+            this.lblStatus.Size = new System.Drawing.Size(40, 13);
             this.lblStatus.TabIndex = 0;
             this.lblStatus.Text = "Status:";
             // 
             // txtStatus
             // 
-            this.txtStatus.Location = new System.Drawing.Point(112, 10);
-            this.txtStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.txtStatus.Location = new System.Drawing.Point(56, 5);
+            this.txtStatus.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.txtStatus.Name = "txtStatus";
-            this.txtStatus.Size = new System.Drawing.Size(1140, 25);
+            this.txtStatus.Size = new System.Drawing.Size(570, 13);
             this.txtStatus.TabIndex = 1;
             // 
             // rtbChat
@@ -356,20 +469,20 @@ namespace Marbles_On_Twitch_Bot
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rtbChat.Enabled = false;
-            this.rtbChat.Location = new System.Drawing.Point(12, 200);
-            this.rtbChat.Margin = new System.Windows.Forms.Padding(4);
+            this.rtbChat.Location = new System.Drawing.Point(6, 104);
+            this.rtbChat.Margin = new System.Windows.Forms.Padding(2);
             this.rtbChat.Name = "rtbChat";
-            this.rtbChat.Size = new System.Drawing.Size(962, 225);
+            this.rtbChat.Size = new System.Drawing.Size(483, 80);
             this.rtbChat.TabIndex = 6;
             this.rtbChat.Text = "";
             this.rtbChat.TextChanged += new System.EventHandler(this.rtbChat_TextChanged);
             // 
             // cmdVerbinden
             // 
-            this.cmdVerbinden.Location = new System.Drawing.Point(24, 79);
-            this.cmdVerbinden.Margin = new System.Windows.Forms.Padding(4);
+            this.cmdVerbinden.Location = new System.Drawing.Point(12, 41);
+            this.cmdVerbinden.Margin = new System.Windows.Forms.Padding(2);
             this.cmdVerbinden.Name = "cmdVerbinden";
-            this.cmdVerbinden.Size = new System.Drawing.Size(178, 102);
+            this.cmdVerbinden.Size = new System.Drawing.Size(89, 53);
             this.cmdVerbinden.TabIndex = 2;
             this.cmdVerbinden.Text = "Verbinden";
             this.cmdVerbinden.UseVisualStyleBackColor = true;
@@ -377,10 +490,10 @@ namespace Marbles_On_Twitch_Bot
             // 
             // txtChannel1
             // 
-            this.txtChannel1.Location = new System.Drawing.Point(116, 38);
-            this.txtChannel1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.txtChannel1.Location = new System.Drawing.Point(58, 20);
+            this.txtChannel1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtChannel1.Name = "txtChannel1";
-            this.txtChannel1.Size = new System.Drawing.Size(272, 31);
+            this.txtChannel1.Size = new System.Drawing.Size(138, 20);
             this.txtChannel1.TabIndex = 1;
             // 
             // bgwBot1
@@ -389,48 +502,48 @@ namespace Marbles_On_Twitch_Bot
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(634, 13);
-            this.txtUsername.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.txtUsername.Location = new System.Drawing.Point(317, 7);
+            this.txtUsername.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(340, 31);
+            this.txtUsername.Size = new System.Drawing.Size(172, 20);
             this.txtUsername.TabIndex = 4;
             // 
             // txtToken
             // 
-            this.txtToken.Location = new System.Drawing.Point(634, 56);
-            this.txtToken.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.txtToken.Location = new System.Drawing.Point(317, 29);
+            this.txtToken.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtToken.Name = "txtToken";
             this.txtToken.PasswordChar = '*';
-            this.txtToken.Size = new System.Drawing.Size(340, 31);
+            this.txtToken.Size = new System.Drawing.Size(172, 20);
             this.txtToken.TabIndex = 5;
             // 
             // lblUsername
             // 
             this.lblUsername.AutoSize = true;
-            this.lblUsername.Location = new System.Drawing.Point(512, 17);
-            this.lblUsername.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblUsername.Location = new System.Drawing.Point(256, 9);
+            this.lblUsername.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(116, 25);
+            this.lblUsername.Size = new System.Drawing.Size(58, 13);
             this.lblUsername.TabIndex = 11;
             this.lblUsername.Text = "Username:";
             // 
             // lblToken
             // 
             this.lblToken.AutoSize = true;
-            this.lblToken.Location = new System.Drawing.Point(548, 58);
-            this.lblToken.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblToken.Location = new System.Drawing.Point(274, 30);
+            this.lblToken.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblToken.Name = "lblToken";
-            this.lblToken.Size = new System.Drawing.Size(78, 25);
+            this.lblToken.Size = new System.Drawing.Size(41, 13);
             this.lblToken.TabIndex = 12;
             this.lblToken.Text = "Token:";
             // 
             // linkToken
             // 
             this.linkToken.AutoSize = true;
-            this.linkToken.Location = new System.Drawing.Point(630, 94);
-            this.linkToken.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.linkToken.Location = new System.Drawing.Point(315, 49);
+            this.linkToken.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.linkToken.Name = "linkToken";
-            this.linkToken.Size = new System.Drawing.Size(156, 25);
+            this.linkToken.Size = new System.Drawing.Size(79, 13);
             this.linkToken.TabIndex = 13;
             this.linkToken.TabStop = true;
             this.linkToken.Text = "get your Token";
@@ -439,10 +552,10 @@ namespace Marbles_On_Twitch_Bot
             // LinkDeveloper
             // 
             this.LinkDeveloper.AutoSize = true;
-            this.LinkDeveloper.Location = new System.Drawing.Point(630, 119);
-            this.LinkDeveloper.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.LinkDeveloper.Location = new System.Drawing.Point(315, 62);
+            this.LinkDeveloper.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LinkDeveloper.Name = "LinkDeveloper";
-            this.LinkDeveloper.Size = new System.Drawing.Size(157, 25);
+            this.LinkDeveloper.Size = new System.Drawing.Size(78, 13);
             this.LinkDeveloper.TabIndex = 14;
             this.LinkDeveloper.TabStop = true;
             this.LinkDeveloper.Text = "Visit Developer";
@@ -457,27 +570,27 @@ namespace Marbles_On_Twitch_Bot
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 42);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(4, 22);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(98, 25);
+            this.label1.Size = new System.Drawing.Size(49, 13);
             this.label1.TabIndex = 15;
             this.label1.Text = "Channel:";
             // 
             // lblVerbunden
             // 
-            this.lblVerbunden.Location = new System.Drawing.Point(634, 162);
-            this.lblVerbunden.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblVerbunden.Location = new System.Drawing.Point(317, 84);
+            this.lblVerbunden.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblVerbunden.Name = "lblVerbunden";
-            this.lblVerbunden.Size = new System.Drawing.Size(340, 37);
+            this.lblVerbunden.Size = new System.Drawing.Size(170, 19);
             this.lblVerbunden.TabIndex = 16;
             // 
             // cmdTrennen
             // 
-            this.cmdTrennen.Location = new System.Drawing.Point(208, 79);
-            this.cmdTrennen.Margin = new System.Windows.Forms.Padding(4);
+            this.cmdTrennen.Location = new System.Drawing.Point(104, 41);
+            this.cmdTrennen.Margin = new System.Windows.Forms.Padding(2);
             this.cmdTrennen.Name = "cmdTrennen";
-            this.cmdTrennen.Size = new System.Drawing.Size(178, 102);
+            this.cmdTrennen.Size = new System.Drawing.Size(89, 53);
             this.cmdTrennen.TabIndex = 3;
             this.cmdTrennen.Text = "Trennen";
             this.cmdTrennen.UseVisualStyleBackColor = true;
@@ -486,10 +599,9 @@ namespace Marbles_On_Twitch_Bot
             // lblCounter
             // 
             this.lblCounter.AutoSize = true;
-            this.lblCounter.Location = new System.Drawing.Point(566, 156);
-            this.lblCounter.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lblCounter.Location = new System.Drawing.Point(283, 81);
             this.lblCounter.Name = "lblCounter";
-            this.lblCounter.Size = new System.Drawing.Size(36, 25);
+            this.lblCounter.Size = new System.Drawing.Size(19, 13);
             this.lblCounter.TabIndex = 17;
             this.lblCounter.Text = "10";
             // 
@@ -502,17 +614,16 @@ namespace Marbles_On_Twitch_Bot
             // lblHinweis
             // 
             this.lblHinweis.AutoSize = true;
-            this.lblHinweis.Location = new System.Drawing.Point(396, 154);
-            this.lblHinweis.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lblHinweis.Location = new System.Drawing.Point(198, 80);
             this.lblHinweis.Name = "lblHinweis";
-            this.lblHinweis.Size = new System.Drawing.Size(158, 25);
+            this.lblHinweis.Size = new System.Drawing.Size(79, 13);
             this.lblHinweis.TabIndex = 18;
             this.lblHinweis.Text = "Send Play on : ";
             // 
             // numCounter
             // 
-            this.numCounter.Location = new System.Drawing.Point(400, 113);
-            this.numCounter.Margin = new System.Windows.Forms.Padding(4);
+            this.numCounter.Location = new System.Drawing.Point(200, 59);
+            this.numCounter.Margin = new System.Windows.Forms.Padding(2);
             this.numCounter.Maximum = new decimal(new int[] {
             999,
             0,
@@ -524,7 +635,7 @@ namespace Marbles_On_Twitch_Bot
             0,
             0});
             this.numCounter.Name = "numCounter";
-            this.numCounter.Size = new System.Drawing.Size(120, 31);
+            this.numCounter.Size = new System.Drawing.Size(60, 20);
             this.numCounter.TabIndex = 19;
             this.numCounter.Value = new decimal(new int[] {
             10,
@@ -538,10 +649,9 @@ namespace Marbles_On_Twitch_Bot
             this.lblViewer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblViewer.AutoSize = true;
-            this.lblViewer.Location = new System.Drawing.Point(416, 435);
-            this.lblViewer.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lblViewer.Location = new System.Drawing.Point(331, 229);
             this.lblViewer.Name = "lblViewer";
-            this.lblViewer.Size = new System.Drawing.Size(83, 25);
+            this.lblViewer.Size = new System.Drawing.Size(42, 13);
             this.lblViewer.TabIndex = 20;
             this.lblViewer.Text = "Viewer:";
             // 
@@ -549,17 +659,24 @@ namespace Marbles_On_Twitch_Bot
             // 
             this.lblViewerCounter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblViewerCounter.Location = new System.Drawing.Point(512, 433);
-            this.lblViewerCounter.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lblViewerCounter.Location = new System.Drawing.Point(379, 228);
             this.lblViewerCounter.Name = "lblViewerCounter";
-            this.lblViewerCounter.Size = new System.Drawing.Size(240, 33);
+            this.lblViewerCounter.Size = new System.Drawing.Size(120, 17);
             this.lblViewerCounter.TabIndex = 21;
+            // 
+            // lblDebug
+            // 
+            this.lblDebug.Location = new System.Drawing.Point(4, 186);
+            this.lblDebug.Name = "lblDebug";
+            this.lblDebug.Size = new System.Drawing.Size(321, 59);
+            this.lblDebug.TabIndex = 22;
             // 
             // InvokeThreadSafeForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(996, 469);
+            this.ClientSize = new System.Drawing.Size(498, 244);
+            this.Controls.Add(this.lblDebug);
             this.Controls.Add(this.lblViewerCounter);
             this.Controls.Add(this.lblViewer);
             this.Controls.Add(this.numCounter);
@@ -581,8 +698,8 @@ namespace Marbles_On_Twitch_Bot
             this.Controls.Add(this.lblStatus);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.MinimumSize = new System.Drawing.Size(992, 450);
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.MinimumSize = new System.Drawing.Size(504, 253);
             this.Name = "InvokeThreadSafeForm";
             this.Text = "Marbles on TwitchBot";
             this.Load += new System.EventHandler(this.InvokeThreadSafeForm_Load);
